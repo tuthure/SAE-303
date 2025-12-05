@@ -1,27 +1,333 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ton doc aframe + ton .mind</title>
+    <title>Enseignement Supérieur - AR</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    
+    <style>
+        body { margin: 0; overflow: hidden; }
+    </style>
 </head>
 <body>
-    <a-scene mindar-image="imageTargetSrc: ./affiche.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights">
-      
-        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-        <a-entity mindar-image-target="targetIndex: 0">
-            <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-            <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"></a-gltf-model>
-        </a-entity>
+    <a-scene mindar-image="imageTargetSrc: ./affiche.mind; filterMinCF:0.001; filterBeta: 10;" 
+         color-space="sRGB" 
+         renderer="colorManagement: true, physicallyCorrectLights" 
+         vr-mode-ui="enabled: false" 
+         device-orientation-permission-ui="enabled: false">
       
         <a-assets>
-            <img id="card" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.png" />
-            <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
+            <a-asset-item id="bati-vert-model" src="./bativert.glb"></a-asset-item>
+            <a-asset-item id="bati-bleu-model" src="./batibleu.glb"></a-asset-item>
+            <a-asset-item id="bati-orange-model" src="./batiorange.glb"></a-asset-item>
+            <a-asset-item id="etudiant-model" src="./etudiant.glb"></a-asset-item>
+            <a-asset-item id="apprenti-model" src="./apprenti.glb"></a-asset-item>
+
+            <a-asset-item id="porte5-model" src="./porte5.glb"></a-asset-item>
+            <a-asset-item id="porte6-model" src="./porte6.glb"></a-asset-item>
+            <a-asset-item id="porte7-model" src="./porte7.glb"></a-asset-item>
+            
+            <a-asset-item id="etudiant5-model" src="./etudiant5.glb"></a-asset-item>
+            <a-asset-item id="etudiant6-model" src="./etudiant6.glb"></a-asset-item>
+            <a-asset-item id="etudiant7-model" src="./etudiant7.glb"></a-asset-item>
         </a-assets>
-        
+
+        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable">
+        </a-camera>
+
+        <a-entity mindar-image-target="targetIndex: 0">
+            
+            <a-entity id="plus-button-1" class="clickable" position="0.3 0.5 0" geometry="primitive: circle; radius: 0.05" material="color: #0056b3; opacity: 0.9">
+                <a-text value="+" align="center" width="2" position="0 0 0.01"></a-text>
+            </a-entity>
+
+            <a-entity id="spheres-group" visible="false" position="0 0.3 0.1" scale="0.6 0.6 0.6">
+                <a-plane id="bg-plane-1" material="shader: flat; color: black; opacity: 0.5" width="3.2" height="1.2" position="0 -0.05 -0.05"></a-plane>
+                <a-entity position="-1 0 0" class="animatable-1" animation="property: scale; from: 0 0 0; to: 1 1 1; dur: 500; startEvents: show">
+                    <a-text value="8" align="center" color="white" width="3" position="0 0.4 0"></a-text>
+                    <a-gltf-model src="#bati-vert-model" scale="0.03 0.03 0.03" position="0 -0.25 0"></a-gltf-model>
+                    <a-text value="Public" align="center" color="white" width="2" position="0 -0.5 0"></a-text>
+                </a-entity>
+                <a-entity position="0 0 0" class="animatable-1" animation="property: scale; from: 0 0 0; to: 1 1 1; dur: 500; delay: 100; startEvents: show">
+                     <a-text value="3" align="center" color="white" width="3" position="0 0.4 0"></a-text>
+                    <a-gltf-model src="#bati-bleu-model" scale="0.03 0.03 0.03" position="0 -0.25 0"></a-gltf-model>
+                    <a-text value="Prive\nsous contrat" align="center" color="white" width="2" position="0 -0.5 0"></a-text>
+                </a-entity>
+                <a-entity position="1 0 0" class="animatable-1" animation="property: scale; from: 0 0 0; to: 1 1 1; dur: 500; delay: 200; startEvents: show">
+                     <a-text value="10" align="center" color="white" width="3" position="0 0.4 0"></a-text>
+                    <a-gltf-model src="#bati-orange-model" scale="0.03 0.03 0.03" position="0 -0.25 0"></a-gltf-model>
+                    <a-text value="Prive\nsans contrat" align="center" color="white" width="2" position="0 -0.5 0"></a-text>
+                </a-entity>
+            </a-entity>
+
+
+            <a-entity id="plus-button-2" class="clickable" position="-0.3 -0.5 0" geometry="primitive: circle; radius: 0.05" material="color: #0056b3; opacity: 0.9">
+                <a-text value="+" align="center" width="2" position="0 0 0.01"></a-text>
+            </a-entity>
+
+            <a-entity id="carousel-group" visible="false" position="0 -0.3 0.1" scale="0.5 0.5 0.5">
+                <a-plane id="bg-plane-2" material="shader: flat; color: #003666; opacity: 0.8" width="3.5" height="1.5" position="0 0 -0.8"></a-plane>
+                <a-text value="Nos Profils" align="center" color="white" width="4" position="0 0.6 0"></a-text>
+                <a-entity id="arrow-left" class="clickable" position="-1 0 0" geometry="primitive: circle; radius: 0.2" material="color: white; opacity: 0.5">
+                    <a-text value="<" align="center" color="white" width="10" position="-0.05 0 0"></a-text>
+                </a-entity>
+                <a-entity id="arrow-right" class="clickable" position="1 0 0" geometry="primitive: circle; radius: 0.2" material="color: white; opacity: 0.5">
+                    <a-text value=">" align="center" color="white" width="10" position="0.05 0 0"></a-text>
+                </a-entity>
+                <a-entity id="spinner" rotation="0 0 0">
+                    <a-entity position="0 0 0.5" rotation="0 0 0">
+                        <a-gltf-model src="#etudiant-model" scale="0.1 0.1 0.1" position="0 -0.2 0"></a-gltf-model>
+                        <a-text class="student-text" value="Etudiant 1" opacity="1" align="center" color="white" width="3" position="0 -0.6 0"></a-text>
+                    </a-entity>
+                    <a-entity position="0.5 0 0" rotation="0 -90 0">
+                        <a-gltf-model src="#etudiant-model" scale="0.1 0.1 0.1" position="0 -0.2 0"></a-gltf-model>
+                        <a-text class="student-text" value="Etudiant 2" opacity="0" align="center" color="white" width="3" rotation="0 180 0" position="0 -0.6 0"></a-text>
+                    </a-entity>
+                    <a-entity position="0 0 -0.5" rotation="0 180 0">
+                        <a-gltf-model src="#etudiant-model" scale="0.1 0.1 0.1" position="0 -0.2 0"></a-gltf-model>
+                        <a-text class="student-text" value="Etudiant 3" opacity="0" align="center" color="white" width="3" position="0 -0.6 0"></a-text>
+                    </a-entity>
+                    <a-entity position="-0.5 0 0" rotation="0 90 0">
+                        <a-gltf-model src="#apprenti-model" scale="0.1 0.1 0.1" position="0 -0.2 0"></a-gltf-model>
+                        <a-text class="student-text" value="Apprenti" opacity="0" align="center" color="#e67e22" width="3" rotation="0 180 0" position="0 -0.6 0"></a-text>
+                    </a-entity>
+                </a-entity>
+            </a-entity>
+
+
+            <a-entity id="plus-button-3" class="clickable" position="0.2 0 0" geometry="primitive: circle; radius: 0.05" material="color: #0056b3; opacity: 0.9">
+                <a-text value="+" align="center" width="2" position="0 0 0.01"></a-text>
+            </a-entity>
+
+            <a-entity id="funnel-group" visible="false" position="0 0 0.2" scale="0.5 0.5 0.5">
+                
+                <a-plane material="shader: flat; color: black; opacity: 0.6" width="3" height="1.5" position="0 0 -0.5"></a-plane>
+                <a-text value="Flux Etudiants" align="center" color="white" width="4" position="0 0.6 0"></a-text>
+
+                <a-entity position="-0.8 -0.3 -0.3">
+                    <a-gltf-model src="#porte5-model" scale="0.6 0.6 0.6" position="0 -0.2 0" rotation="0 270 0"></a-gltf-model>
+                    <a-text value="35% (BAC+2)" align="center" width="2" position="0 -0.3 0"></a-text>
+                </a-entity>
+                <a-entity position="0 -0.2 -0.3">
+                    <a-gltf-model src="#porte6-model" scale="0.4 0.4 0.4" position="0 -0.2 0" rotation="0 270 0"></a-gltf-model>
+                    <a-text value="56% (BAC+3)" align="center" width="2" position="0 -0.3 0"></a-text>
+                </a-entity>
+                <a-entity position="0.8 -0.2 -0.3">
+                    <a-gltf-model src="#porte7-model" scale="0.2 0.2 0.2" position="0 -0.2 0" rotation="0 270 0"></a-gltf-model>
+                    <a-text value="9% (BAC+5)" align="center" width="2" position="0 -0.3 0"></a-text>
+                </a-entity>
+
+                <a-entity id="crowd-container"></a-entity>
+
+            </a-entity>
+
+        </a-entity>
     </a-scene>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // --- LOGIQUE 1 : BATIMENTS ---
+            const btn1 = document.querySelector('#plus-button-1');
+            const group1 = document.querySelector('#spheres-group');
+            const animElements1 = document.querySelectorAll('.animatable-1'); 
+            const btnText1 = btn1.querySelector('a-text');
+            let isOpen1 = false;
+
+            // --- LOGIQUE 2 : CARROUSEL ---
+            const btn2 = document.querySelector('#plus-button-2');
+            const group2 = document.querySelector('#carousel-group');
+            const btnText2 = btn2.querySelector('a-text');
+            const arrowLeft = document.querySelector('#arrow-left');
+            const arrowRight = document.querySelector('#arrow-right');
+            const spinner = document.querySelector('#spinner'); 
+            const studentTexts = document.querySelectorAll('.student-text');
+            let isOpen2 = false;
+            let currentRotation = 0; 
+            let currentIndex = 0; 
+
+            // --- LOGIQUE 3 : ENTONNOIR ---
+            const btn3 = document.querySelector('#plus-button-3');
+            const group3 = document.querySelector('#funnel-group');
+            const btnText3 = btn3.querySelector('a-text');
+            const crowdContainer = document.querySelector('#crowd-container');
+            let isOpen3 = false;
+
+
+            // --- EVENTS BOUTON 1 ---
+            btn1.addEventListener('click', function (evt) {
+                if(isOpen2 || isOpen3) return; 
+                isOpen1 = !isOpen1;
+                if (isOpen1) {
+                    group1.setAttribute('visible', 'true');
+                    animElements1.forEach(el => el.emit('show'));
+                    btn1.setAttribute('material', 'color', '#d63031'); 
+                    btnText1.setAttribute('value', 'X');
+                    btn1.setAttribute('position', '0 0.6 0.2'); 
+                    btn2.setAttribute('visible', 'false');
+                    btn3.setAttribute('visible', 'false');
+                } else {
+                    group1.setAttribute('visible', 'false');
+                    btn1.setAttribute('material', 'color', '#0056b3');
+                    btnText1.setAttribute('value', '+');
+                    btn1.setAttribute('position', '0.3 0.5 0');
+                    btn2.setAttribute('visible', 'true');
+                    btn3.setAttribute('visible', 'true');
+                }
+            });
+
+            // --- EVENTS BOUTON 2 ---
+            function changeText(oldIndex, newIndex) {
+                studentTexts[oldIndex].setAttribute('animation', 'property: opacity; from: 1; to: 0; dur: 250; easing: linear');
+                studentTexts[newIndex].setAttribute('animation', 'property: opacity; from: 0; to: 1; dur: 250; easing: linear');
+            }
+            function rotateSpinner(angle) {
+                currentRotation += angle;
+                spinner.setAttribute('animation', `property: rotation; to: 0 ${currentRotation} 0; dur: 500; easing: easeInOutQuad`);
+            }
+            arrowRight.addEventListener('click', function() {
+                rotateSpinner(-90);
+                let oldIndex = currentIndex;
+                currentIndex++;
+                if (currentIndex > 3) currentIndex = 0;
+                changeText(oldIndex, currentIndex);
+            });
+            arrowLeft.addEventListener('click', function() {
+                rotateSpinner(90);
+                let oldIndex = currentIndex;
+                currentIndex--;
+                if (currentIndex < 0) currentIndex = 3;
+                changeText(oldIndex, currentIndex);
+            });
+
+            btn2.addEventListener('click', function (evt) {
+                if(isOpen1 || isOpen3) return;
+                isOpen2 = !isOpen2;
+                if (isOpen2) {
+                    group2.setAttribute('visible', 'true');
+                    btn2.setAttribute('material', 'color', '#d63031'); 
+                    btnText2.setAttribute('value', 'X');
+                    btn2.setAttribute('position', '0 0 0.35'); 
+                    btn1.setAttribute('visible', 'false');
+                    btn3.setAttribute('visible', 'false');
+                    
+                    studentTexts.forEach((el, i) => {
+                        el.setAttribute('opacity', i === 0 ? 1 : 0);
+                        el.removeAttribute('animation'); 
+                    });
+                    currentIndex = 0;
+                    currentRotation = 0;
+                    spinner.setAttribute('rotation', '0 0 0');
+                } else {
+                    group2.setAttribute('visible', 'false');
+                    btn2.setAttribute('material', 'color', '#0056b3');
+                    btnText2.setAttribute('value', '+');
+                    btn2.setAttribute('position', '-0.3 -0.5 0');
+                    btn1.setAttribute('visible', 'true');
+                    btn3.setAttribute('visible', 'true');
+                }
+            });
+
+            // --- EVENTS BOUTON 3 ---
+            
+            const TOTAL_STUDENTS = 40; 
+            
+            function createCrowd() {
+                crowdContainer.innerHTML = '';
+
+                for(let i=0; i<TOTAL_STUDENTS; i++) {
+                    
+                    let rand = Math.random() * 100;
+                    let targetX = 0;
+                    let modelToUse = '';
+
+                    // LOGIQUE DU CHOIX DE MODELE ET DESTINATION
+                    if (rand < 35) {
+                        targetX = -0.8; // Porte 1
+                        modelToUse = '#etudiant5-model'; // Etudiant pour Porte 5 (niv 5)
+                    } else if (rand < 91) {
+                        targetX = 0;    // Porte 2
+                        modelToUse = '#etudiant6-model'; // Etudiant pour Porte 6 (niv 6)
+                    } else {
+                        targetX = 0.8;  // Porte 3
+                        modelToUse = '#etudiant7-model'; // Etudiant pour Porte 7 (niv 7)
+                    }
+
+                    let startX = (Math.random() - 0.5) * 1.5; 
+                    let startZ = 0.5 + Math.random() * 0.5;
+                    let startY = -0.4;
+
+                    // 1. Conteneur (Marche)
+                    const walkerContainer = document.createElement('a-entity');
+                    walkerContainer.setAttribute('position', `${startX} ${startY} ${startZ}`);
+
+                    // 2. Modèle (Saut) - Utilisation du bon modèle
+                    const modelEntity = document.createElement('a-entity');
+                    modelEntity.setAttribute('gltf-model', modelToUse);
+                    modelEntity.setAttribute('scale', '0.15 0.15 0.15');
+                    
+                    // Sautillement rapide et petit
+                    modelEntity.setAttribute('animation__hop', {
+                        property: 'object3D.position.y', 
+                        from: 0,
+                        to: 0.03,
+                        dur: 150,
+                        dir: 'alternate',
+                        loop: true,
+                        easing: 'easeInOutQuad'
+                    });
+
+                    walkerContainer.appendChild(modelEntity);
+
+                    let delay = Math.random() * 1000;
+                    let duration = 2000 + Math.random() * 1000;
+
+                    walkerContainer.setAttribute('animation__walk', `property: position; to: ${targetX} ${startY} -0.5; dur: ${duration}; delay: ${delay}; easing: linear`);
+
+                    walkerContainer.addEventListener('animationcomplete__walk', function() {
+                        modelEntity.removeAttribute('animation__hop');
+                        modelEntity.setAttribute('position', {x: 0, y: 0, z: 0});
+                    });
+
+                    crowdContainer.appendChild(walkerContainer);
+                }
+            }
+
+            function clearCrowd() {
+                crowdContainer.innerHTML = '';
+            }
+
+            btn3.addEventListener('click', function (evt) {
+                if(isOpen1 || isOpen2) return;
+
+                isOpen3 = !isOpen3;
+                if (isOpen3) {
+                    group3.setAttribute('visible', 'true');
+                    btn3.setAttribute('material', 'color', '#d63031'); 
+                    btnText3.setAttribute('value', 'X');
+                    btn3.setAttribute('position', '0 0 0.2'); 
+                    
+                    btn1.setAttribute('visible', 'false');
+                    btn2.setAttribute('visible', 'false');
+
+                    createCrowd();
+
+                } else {
+                    group3.setAttribute('visible', 'false');
+                    btn3.setAttribute('material', 'color', '#0056b3');
+                    btnText3.setAttribute('value', '+');
+                    btn3.setAttribute('position', '0.2 0 0');
+                    
+                    btn1.setAttribute('visible', 'true');
+                    btn2.setAttribute('visible', 'true');
+
+                    clearCrowd();
+                }
+            });
+
+        });
+    </script>
 </body>
 </html>
