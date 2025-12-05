@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enseignement Supérieur - AR</title>
+    <title>Enseignement supérieur biterrois - AR Experience</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     
@@ -13,15 +13,16 @@
 </head>
 <body>
     <a-scene mindar-image="imageTargetSrc: ./affiche.mind; filterMinCF:0.001; filterBeta: 10;" 
-         color-space="sRGB" 
-         renderer="colorManagement: true, physicallyCorrectLights" 
-         vr-mode-ui="enabled: false" 
-         device-orientation-permission-ui="enabled: false">
+             color-space="sRGB" 
+             renderer="colorManagement: true, physicallyCorrectLights" 
+             vr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: false">
       
         <a-assets>
             <a-asset-item id="bati-vert-model" src="./bativert.glb"></a-asset-item>
             <a-asset-item id="bati-bleu-model" src="./batibleu.glb"></a-asset-item>
             <a-asset-item id="bati-orange-model" src="./batiorange.glb"></a-asset-item>
+            
             <a-asset-item id="etudiant-model" src="./etudiant.glb"></a-asset-item>
             <a-asset-item id="apprenti-model" src="./apprenti.glb"></a-asset-item>
 
@@ -34,8 +35,7 @@
             <a-asset-item id="etudiant7-model" src="./etudiant7.glb"></a-asset-item>
         </a-assets>
 
-        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable">
-        </a-camera>
+        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable"></a-camera>
 
         <a-entity mindar-image-target="targetIndex: 0">
             
@@ -44,21 +44,24 @@
             </a-entity>
 
             <a-entity id="spheres-group" visible="false" position="0 0.3 0.1" scale="0.6 0.6 0.6">
-                <a-plane id="bg-plane-1" material="shader: flat; color: black; opacity: 0.5" width="3.2" height="1.2" position="0 -0.05 -0.05"></a-plane>
+                <a-plane id="bg-plane-1" material="shader: flat; color: #003666; opacity: 0.8" width="3.2" height="1.2" position="0 -0.05 -0.05"></a-plane>
+                
                 <a-entity position="-1 0 0" class="animatable-1" animation="property: scale; from: 0 0 0; to: 1 1 1; dur: 500; startEvents: show">
                     <a-text value="8" align="center" color="white" width="3" position="0 0.4 0"></a-text>
                     <a-gltf-model src="#bati-vert-model" scale="0.03 0.03 0.03" position="0 -0.25 0"></a-gltf-model>
-                    <a-text value="Public" align="center" color="white" width="2" position="0 -0.5 0"></a-text>
+                    <a-text value="Publics" align="center" color="white" width="2" position="0 -0.5 0"></a-text>
                 </a-entity>
+                
                 <a-entity position="0 0 0" class="animatable-1" animation="property: scale; from: 0 0 0; to: 1 1 1; dur: 500; delay: 100; startEvents: show">
-                     <a-text value="3" align="center" color="white" width="3" position="0 0.4 0"></a-text>
+                      <a-text value="3" align="center" color="white" width="3" position="0 0.4 0"></a-text>
                     <a-gltf-model src="#bati-bleu-model" scale="0.03 0.03 0.03" position="0 -0.25 0"></a-gltf-model>
-                    <a-text value="Prive\nsous contrat" align="center" color="white" width="2" position="0 -0.5 0"></a-text>
+                    <a-text value="Prives\nsous contrat" align="center" color="white" width="2" position="0 -0.5 0"></a-text>
                 </a-entity>
+                
                 <a-entity position="1 0 0" class="animatable-1" animation="property: scale; from: 0 0 0; to: 1 1 1; dur: 500; delay: 200; startEvents: show">
-                     <a-text value="10" align="center" color="white" width="3" position="0 0.4 0"></a-text>
+                      <a-text value="10" align="center" color="white" width="3" position="0 0.4 0"></a-text>
                     <a-gltf-model src="#bati-orange-model" scale="0.03 0.03 0.03" position="0 -0.25 0"></a-gltf-model>
-                    <a-text value="Prive\nsans contrat" align="center" color="white" width="2" position="0 -0.5 0"></a-text>
+                    <a-text value="Prives\nsans contrat" align="center" color="white" width="2" position="0 -0.5 0"></a-text>
                 </a-entity>
             </a-entity>
 
@@ -68,16 +71,27 @@
             </a-entity>
 
             <a-entity id="carousel-group" visible="false" position="0 -0.3 0.1" scale="0.5 0.5 0.5">
-                <a-plane id="bg-plane-2" material="shader: flat; color: #003666; opacity: 0.8" width="3.5" height="1.5" position="0 0 -0.8"></a-plane>
-                <a-text value="Nos Profils" align="center" color="white" width="4" position="0 0.6 0"></a-text>
-                <a-entity id="arrow-left" class="clickable" position="-1 0 0" geometry="primitive: circle; radius: 0.2" material="color: white; opacity: 0.5">
+                <a-entity id="carousel-bg-wrapper" scale="0 0 0" animation="property: scale; to: 1 1 1; dur: 600; easing: easeOutBack; startEvents: open-anim">
+                    <a-plane id="bg-plane-2" material="shader: flat; color: #003666; opacity: 1" width="3.5" height="1.5" position="0 0 -0.7"></a-plane>
+                    <a-text value="En moyenne, 1 etudiant biterrois\nsur 4 est apprenti." align="center" color="white" width="3" position="0 0.58 -0.5"></a-text>
+                </a-entity>
+
+                <a-entity id="arrow-left" class="clickable" position="-1 0 -0.6" scale="0 0 0" 
+                          geometry="primitive: circle; radius: 0.2" material="color: white; opacity: 0.5"
+                          animation="property: scale; to: 1 1 1; dur: 400; delay: 300; easing: easeOutBack; startEvents: open-anim">
                     <a-text value="<" align="center" color="white" width="10" position="-0.05 0 0"></a-text>
                 </a-entity>
-                <a-entity id="arrow-right" class="clickable" position="1 0 0" geometry="primitive: circle; radius: 0.2" material="color: white; opacity: 0.5">
-                    <a-text value=">" align="center" color="white" width="10" position="0.05 0 0"></a-text>
+
+                <a-entity id="arrow-right" class="clickable" position="1 0 -0.6" scale="0 0 0"
+                          geometry="primitive: circle; radius: 0.2" material="color: white; opacity: 0.5"
+                          animation="property: scale; to: 1 1 1; dur: 400; delay: 300; easing: easeOutBack; startEvents: open-anim">
+                    <a-text value=">" align="center" color="white" width="10" position="0 0 0"></a-text>
                 </a-entity>
-                <a-entity id="spinner" rotation="0 0 0">
-                    <a-entity position="0 0 0.5" rotation="0 0 0">
+
+                <a-entity id="spinner" position="0 0.1 -1" rotation="0 0 0" scale="0 0 0"
+                          animation__entrance="property: scale; to: 1 1 1; dur: 1000; delay: 200; easing: easeOutElastic; startEvents: open-anim">
+                    
+                    <a-entity position="0 0 0.5">
                         <a-gltf-model src="#etudiant-model" scale="0.1 0.1 0.1" position="0 -0.2 0"></a-gltf-model>
                         <a-text class="student-text" value="Etudiant 1" opacity="1" align="center" color="white" width="3" position="0 -0.6 0"></a-text>
                     </a-entity>
@@ -102,25 +116,31 @@
             </a-entity>
 
             <a-entity id="funnel-group" visible="false" position="0 0 0.2" scale="0.5 0.5 0.5">
-                
-                <a-plane material="shader: flat; color: black; opacity: 0.6" width="3" height="1.5" position="0 0 -0.5"></a-plane>
-                <a-text value="Flux Etudiants" align="center" color="white" width="4" position="0 0.6 0"></a-text>
+                <a-plane material="shader: flat; color: #003666; opacity: 1" width="3" height="1.6" position="0 -0.05 -0.2"></a-plane>
+                <a-text value="90 formations" align="center" color="white" width="4" position="0 0.6 -0.2"></a-text>
 
-                <a-entity position="-0.8 -0.3 -0.3">
-                    <a-gltf-model src="#porte5-model" scale="0.6 0.6 0.6" position="0 -0.2 0" rotation="0 270 0"></a-gltf-model>
-                    <a-text value="35% (BAC+2)" align="center" width="2" position="0 -0.3 0"></a-text>
+                <a-entity class="door-group" position="-0.8 -0.3 -0.2" scale="0 0 0" 
+                          animation="property: scale; to: 1 1 1; dur: 1000; easing: easeOutElastic; startEvents: appear">
+                    <a-text value="Niveau 5\n48 formations" align="center" width="2" position="0 0.7 0.1"></a-text>
+                    <a-gltf-model src="#porte5-model" scale="0.6 0.6 0.6" position="0 -0.2 0.1" rotation="0 270 0"></a-gltf-model>
+                    <a-text id="counter-1" class="percent-text" value="0%" align="center" color="#f1c40f" width="4" position="0 -0.4 0"></a-text>
                 </a-entity>
-                <a-entity position="0 -0.2 -0.3">
-                    <a-gltf-model src="#porte6-model" scale="0.4 0.4 0.4" position="0 -0.2 0" rotation="0 270 0"></a-gltf-model>
-                    <a-text value="56% (BAC+3)" align="center" width="2" position="0 -0.3 0"></a-text>
+
+                <a-entity class="door-group" position="0 -0.3 -0.2" scale="0 0 0"
+                          animation="property: scale; to: 1 1 1; dur: 1000; easing: easeOutElastic; delay: 200; startEvents: appear">
+                    <a-text value="Niveau 6\n37 formations" align="center" width="2" position="0 0.45 0.1"></a-text>
+                    <a-gltf-model src="#porte6-model" scale="0.4 0.4 0.4" position="0 -0.2 0.1" rotation="0 270 0"></a-gltf-model>
+                    <a-text id="counter-2" class="percent-text" value="0%" align="center" color="#f1c40f" width="4" position="0 -0.4 0"></a-text>
                 </a-entity>
-                <a-entity position="0.8 -0.2 -0.3">
-                    <a-gltf-model src="#porte7-model" scale="0.2 0.2 0.2" position="0 -0.2 0" rotation="0 270 0"></a-gltf-model>
-                    <a-text value="9% (BAC+5)" align="center" width="2" position="0 -0.3 0"></a-text>
+
+                <a-entity class="door-group" position="0.8 -0.3 -0.2" scale="0 0 0"
+                          animation="property: scale; to: 1 1 1; dur: 1000; easing: easeOutElastic; delay: 400; startEvents: appear">
+                    <a-text value="Niveau 7\n5 formations" align="center" width="2" position="0 0.2 0.1"></a-text>
+                    <a-gltf-model src="#porte7-model" scale="0.2 0.2 0.2" position="0 -0.2 0.1" rotation="0 270 0"></a-gltf-model>
+                    <a-text id="counter-3" class="percent-text" value="0%" align="center" color="#f1c40f" width="4" position="0 -0.4 0"></a-text>
                 </a-entity>
 
                 <a-entity id="crowd-container"></a-entity>
-
             </a-entity>
 
         </a-entity>
@@ -129,203 +149,290 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // --- LOGIQUE 1 : BATIMENTS ---
-            const btn1 = document.querySelector('#plus-button-1');
-            const group1 = document.querySelector('#spheres-group');
-            const animElements1 = document.querySelectorAll('.animatable-1'); 
-            const btnText1 = btn1.querySelector('a-text');
-            let isOpen1 = false;
-
-            // --- LOGIQUE 2 : CARROUSEL ---
-            const btn2 = document.querySelector('#plus-button-2');
-            const group2 = document.querySelector('#carousel-group');
-            const btnText2 = btn2.querySelector('a-text');
-            const arrowLeft = document.querySelector('#arrow-left');
-            const arrowRight = document.querySelector('#arrow-right');
-            const spinner = document.querySelector('#spinner'); 
-            const studentTexts = document.querySelectorAll('.student-text');
-            let isOpen2 = false;
-            let currentRotation = 0; 
-            let currentIndex = 0; 
-
-            // --- LOGIQUE 3 : ENTONNOIR ---
-            const btn3 = document.querySelector('#plus-button-3');
-            const group3 = document.querySelector('#funnel-group');
-            const btnText3 = btn3.querySelector('a-text');
-            const crowdContainer = document.querySelector('#crowd-container');
-            let isOpen3 = false;
-
-
-            // --- EVENTS BOUTON 1 ---
-            btn1.addEventListener('click', function (evt) {
-                if(isOpen2 || isOpen3) return; 
-                isOpen1 = !isOpen1;
-                if (isOpen1) {
-                    group1.setAttribute('visible', 'true');
-                    animElements1.forEach(el => el.emit('show'));
-                    btn1.setAttribute('material', 'color', '#d63031'); 
-                    btnText1.setAttribute('value', 'X');
-                    btn1.setAttribute('position', '0 0.6 0.2'); 
-                    btn2.setAttribute('visible', 'false');
-                    btn3.setAttribute('visible', 'false');
-                } else {
-                    group1.setAttribute('visible', 'false');
-                    btn1.setAttribute('material', 'color', '#0056b3');
-                    btnText1.setAttribute('value', '+');
-                    btn1.setAttribute('position', '0.3 0.5 0');
-                    btn2.setAttribute('visible', 'true');
-                    btn3.setAttribute('visible', 'true');
+            // ==========================================
+            // 1. CONFIGURATION & CONSTANTES
+            // ==========================================
+            const CONFIG = {
+                colors: {
+                    active: '#d63031',  // Rouge
+                    inactive: '#0056b3', // Bleu
+                    gold: '#f1c40f'
+                },
+                positions: {
+                    btn1: { closed: '0.3 0.5 0', open: '0.9 0.6 0.1' },
+                    btn2: { closed: '-0.3 -0.5 0', open: '0.81 0.034 -0.2' },
+                    btn3: { closed: '0.2 0 0', open: '0.71 0.35 0.2' }
+                },
+                delays: {
+                    crowdStart: 1200,    // Délai avant début marche
+                    countersStart: 500   // Délai supplémentaire après marche pour compteurs
                 }
-            });
+            };
 
-            // --- EVENTS BOUTON 2 ---
-            function changeText(oldIndex, newIndex) {
-                studentTexts[oldIndex].setAttribute('animation', 'property: opacity; from: 1; to: 0; dur: 250; easing: linear');
-                studentTexts[newIndex].setAttribute('animation', 'property: opacity; from: 0; to: 1; dur: 250; easing: linear');
+            const STATE = {
+                activeSection: null // 1, 2, ou 3 (null si tout est fermé)
+            };
+
+            // ==========================================
+            // 2. UTILITAIRES
+            // ==========================================
+            function animateValue(id, end, duration) {
+                const obj = document.getElementById(id);
+                if(!obj) return;
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.setAttribute('value', Math.floor(progress * end) + "%");
+                    if (progress < 1) window.requestAnimationFrame(step);
+                };
+                window.requestAnimationFrame(step);
             }
-            function rotateSpinner(angle) {
-                currentRotation += angle;
-                spinner.setAttribute('animation', `property: rotation; to: 0 ${currentRotation} 0; dur: 500; easing: easeInOutQuad`);
-            }
-            arrowRight.addEventListener('click', function() {
-                rotateSpinner(-90);
-                let oldIndex = currentIndex;
-                currentIndex++;
-                if (currentIndex > 3) currentIndex = 0;
-                changeText(oldIndex, currentIndex);
-            });
-            arrowLeft.addEventListener('click', function() {
-                rotateSpinner(90);
-                let oldIndex = currentIndex;
-                currentIndex--;
-                if (currentIndex < 0) currentIndex = 3;
-                changeText(oldIndex, currentIndex);
-            });
 
-            btn2.addEventListener('click', function (evt) {
-                if(isOpen1 || isOpen3) return;
-                isOpen2 = !isOpen2;
-                if (isOpen2) {
-                    group2.setAttribute('visible', 'true');
-                    btn2.setAttribute('material', 'color', '#d63031'); 
-                    btnText2.setAttribute('value', 'X');
-                    btn2.setAttribute('position', '0 0 0.35'); 
-                    btn1.setAttribute('visible', 'false');
-                    btn3.setAttribute('visible', 'false');
+            function updateUI(activeId) {
+                // IDs des boutons
+                const buttons = [
+                    { id: 1, el: document.querySelector('#plus-button-1'), pos: CONFIG.positions.btn1 },
+                    { id: 2, el: document.querySelector('#plus-button-2'), pos: CONFIG.positions.btn2 },
+                    { id: 3, el: document.querySelector('#plus-button-3'), pos: CONFIG.positions.btn3 }
+                ];
+
+                buttons.forEach(btn => {
+                    const textEl = btn.el.querySelector('a-text');
                     
-                    studentTexts.forEach((el, i) => {
-                        el.setAttribute('opacity', i === 0 ? 1 : 0);
-                        el.removeAttribute('animation'); 
-                    });
-                    currentIndex = 0;
-                    currentRotation = 0;
-                    spinner.setAttribute('rotation', '0 0 0');
-                } else {
-                    group2.setAttribute('visible', 'false');
-                    btn2.setAttribute('material', 'color', '#0056b3');
-                    btnText2.setAttribute('value', '+');
-                    btn2.setAttribute('position', '-0.3 -0.5 0');
-                    btn1.setAttribute('visible', 'true');
-                    btn3.setAttribute('visible', 'true');
-                }
-            });
-
-            // --- EVENTS BOUTON 3 ---
-            
-            const TOTAL_STUDENTS = 40; 
-            
-            function createCrowd() {
-                crowdContainer.innerHTML = '';
-
-                for(let i=0; i<TOTAL_STUDENTS; i++) {
-                    
-                    let rand = Math.random() * 100;
-                    let targetX = 0;
-                    let modelToUse = '';
-
-                    // LOGIQUE DU CHOIX DE MODELE ET DESTINATION
-                    if (rand < 35) {
-                        targetX = -0.8; // Porte 1
-                        modelToUse = '#etudiant5-model'; // Etudiant pour Porte 5 (niv 5)
-                    } else if (rand < 91) {
-                        targetX = 0;    // Porte 2
-                        modelToUse = '#etudiant6-model'; // Etudiant pour Porte 6 (niv 6)
+                    if (activeId === null) {
+                        // Tout fermé : Reset position et couleur
+                        btn.el.setAttribute('visible', 'true');
+                        btn.el.setAttribute('material', 'color', CONFIG.colors.inactive);
+                        btn.el.setAttribute('position', btn.pos.closed);
+                        textEl.setAttribute('value', '+');
+                    } else if (btn.id === activeId) {
+                        // Celui actif : Rouge, déplacé, croix
+                        btn.el.setAttribute('visible', 'true');
+                        btn.el.setAttribute('material', 'color', CONFIG.colors.active);
+                        btn.el.setAttribute('position', btn.pos.open);
+                        textEl.setAttribute('value', 'X');
                     } else {
-                        targetX = 0.8;  // Porte 3
-                        modelToUse = '#etudiant7-model'; // Etudiant pour Porte 7 (niv 7)
+                        // Les autres : Cachés
+                        btn.el.setAttribute('visible', 'false');
+                    }
+                });
+            }
+
+            // ==========================================
+            // 3. LOGIQUE CARROUSEL
+            // ==========================================
+            const CarouselManager = {
+                group: document.querySelector('#carousel-group'),
+                elements: {
+                    bg: document.querySelector('#carousel-bg-wrapper'),
+                    arrowL: document.querySelector('#arrow-left'),
+                    arrowR: document.querySelector('#arrow-right'),
+                    spinner: document.querySelector('#spinner'),
+                    texts: document.querySelectorAll('.student-text')
+                },
+                index: 0,
+                rotation: 0,
+
+                init: function() {
+                    this.elements.arrowR.addEventListener('click', () => this.rotate(1));
+                    this.elements.arrowL.addEventListener('click', () => this.rotate(-1));
+                },
+
+                open: function() {
+                    this.group.setAttribute('visible', 'true');
+                    this.reset();
+                    // Déclenche les animations d'entrée
+                    ['bg', 'arrowL', 'arrowR', 'spinner'].forEach(k => this.elements[k].emit('open-anim'));
+                },
+
+                close: function() {
+                    this.group.setAttribute('visible', 'false');
+                    this.elements.bg.setAttribute('scale', '0 0 0'); // Reset scale pour prochaine anim
+                },
+
+                reset: function() {
+                    this.index = 0;
+                    this.rotation = 0;
+                    this.elements.spinner.setAttribute('rotation', '0 0 0');
+                    this.elements.spinner.setAttribute('scale', '0 0 0');
+                    this.elements.texts.forEach((el, i) => {
+                        el.setAttribute('opacity', i === 0 ? 1 : 0);
+                        el.removeAttribute('animation');
+                    });
+                },
+
+                rotate: function(direction) {
+                    const oldIndex = this.index;
+                    if(direction === 1) { // Droite
+                        this.index++;
+                        if(this.index > 3) this.index = 0;
+                        this.rotation -= 90;
+                    } else { // Gauche
+                        this.index--;
+                        if(this.index < 0) this.index = 3;
+                        this.rotation += 90;
                     }
 
-                    let startX = (Math.random() - 0.5) * 1.5; 
-                    let startZ = 0.5 + Math.random() * 0.5;
-                    let startY = -0.4;
-
-                    // 1. Conteneur (Marche)
-                    const walkerContainer = document.createElement('a-entity');
-                    walkerContainer.setAttribute('position', `${startX} ${startY} ${startZ}`);
-
-                    // 2. Modèle (Saut) - Utilisation du bon modèle
-                    const modelEntity = document.createElement('a-entity');
-                    modelEntity.setAttribute('gltf-model', modelToUse);
-                    modelEntity.setAttribute('scale', '0.15 0.15 0.15');
+                    // Rotation Spinner
+                    this.elements.spinner.setAttribute('animation', `property: rotation; to: 0 ${this.rotation} 0; dur: 600; easing: easeInOutCubic`);
                     
-                    // Sautillement rapide et petit
-                    modelEntity.setAttribute('animation__hop', {
-                        property: 'object3D.position.y', 
-                        from: 0,
-                        to: 0.03,
-                        dur: 150,
-                        dir: 'alternate',
-                        loop: true,
-                        easing: 'easeInOutQuad'
-                    });
-
-                    walkerContainer.appendChild(modelEntity);
-
-                    let delay = Math.random() * 1000;
-                    let duration = 2000 + Math.random() * 1000;
-
-                    walkerContainer.setAttribute('animation__walk', `property: position; to: ${targetX} ${startY} -0.5; dur: ${duration}; delay: ${delay}; easing: linear`);
-
-                    walkerContainer.addEventListener('animationcomplete__walk', function() {
-                        modelEntity.removeAttribute('animation__hop');
-                        modelEntity.setAttribute('position', {x: 0, y: 0, z: 0});
-                    });
-
-                    crowdContainer.appendChild(walkerContainer);
+                    // Fade Textes
+                    this.elements.texts[oldIndex].setAttribute('animation', 'property: opacity; from: 1; to: 0; dur: 500; easing: easeOutQuad');
+                    this.elements.texts[this.index].setAttribute('animation', `property: opacity; from: 0; to: 1; dur: 500; delay: 150; easing: easeOutQuad`);
                 }
-            }
+            };
+            CarouselManager.init();
 
-            function clearCrowd() {
-                crowdContainer.innerHTML = '';
-            }
 
-            btn3.addEventListener('click', function (evt) {
-                if(isOpen1 || isOpen2) return;
+            // ==========================================
+            // 4. LOGIQUE FOULE & ENTONNOIR
+            // ==========================================
+            const FunnelManager = {
+                group: document.querySelector('#funnel-group'),
+                container: document.querySelector('#crowd-container'),
+                doors: document.querySelectorAll('.door-group'),
+                counters: ['counter-1', 'counter-2', 'counter-3'],
+                timer: null,
 
-                isOpen3 = !isOpen3;
-                if (isOpen3) {
-                    group3.setAttribute('visible', 'true');
-                    btn3.setAttribute('material', 'color', '#d63031'); 
-                    btnText3.setAttribute('value', 'X');
-                    btn3.setAttribute('position', '0 0 0.2'); 
+                open: function() {
+                    this.group.setAttribute('visible', 'true');
+                    this.doors.forEach(door => door.emit('appear'));
                     
-                    btn1.setAttribute('visible', 'false');
-                    btn2.setAttribute('visible', 'false');
+                    // Séquence temporelle
+                    this.timer = setTimeout(() => {
+                        if(STATE.activeSection !== 3) return; // Sécurité si fermé entre temps
+                        
+                        // 1. Lancer la foule
+                        this.createCrowd();
 
-                    createCrowd();
+                        // 2. Lancer les compteurs avec le délai configuré
+                        setTimeout(() => {
+                            if(STATE.activeSection !== 3) return;
+                            animateValue('counter-1', 35, 2500);
+                            animateValue('counter-2', 56, 2500);
+                            animateValue('counter-3', 9, 2500);
+                        }, CONFIG.delays.countersStart);
 
+                    }, CONFIG.delays.crowdStart);
+                },
+
+                close: function() {
+                    this.group.setAttribute('visible', 'false');
+                    clearTimeout(this.timer);
+                    this.container.innerHTML = ''; // Nettoyer foule
+                    this.doors.forEach(door => door.setAttribute('scale', '0 0 0'));
+                    this.counters.forEach(id => {
+                        const el = document.getElementById(id);
+                        if(el) el.setAttribute('value', '0%');
+                    });
+                },
+
+                createCrowd: function() {
+                    this.container.innerHTML = '';
+                    const TOTAL_STUDENTS = 40;
+
+                    for(let i=0; i<TOTAL_STUDENTS; i++) {
+                        let rand = Math.random() * 100;
+                        let targetX, modelToUse;
+
+                        // Distribution
+                        if (rand < 35) { targetX = -0.8; modelToUse = '#etudiant5-model'; } 
+                        else if (rand < 91) { targetX = 0; modelToUse = '#etudiant6-model'; } 
+                        else { targetX = 0.8; modelToUse = '#etudiant7-model'; }
+
+                        // Position départ aléatoire
+                        let startX = (Math.random() - 0.5) * 1.5; 
+                        let startZ = 1 + Math.random() * 0.5;
+                        
+                        // Création entité
+                        const wrapper = document.createElement('a-entity');
+                        wrapper.setAttribute('position', `${startX} -0.5 ${startZ}`);
+
+                        const model = document.createElement('a-entity');
+                        model.setAttribute('gltf-model', modelToUse);
+                        model.setAttribute('scale', '0.15 0.15 0.15');
+                        
+                        // Animation sautillement
+                        model.setAttribute('animation__hop', {
+                            property: 'object3D.position.y', from: 0, to: 0.03, dur: 150, 
+                            dir: 'alternate', loop: true, easing: 'easeInOutQuad'
+                        });
+                        wrapper.appendChild(model);
+
+                        // Animation marche
+                        let delay = Math.random() * 1000;
+                        let duration = 2000 + Math.random() * 1000;
+                        wrapper.setAttribute('animation__walk', `property: position; to: ${targetX} -0.5 -0.3; dur: ${duration}; delay: ${delay}; easing: linear`);
+                        
+                        // Fin marche
+                        wrapper.addEventListener('animationcomplete__walk', () => {
+                            model.removeAttribute('animation__hop');
+                            model.setAttribute('position', '0 0 0');
+                        });
+                        
+                        this.container.appendChild(wrapper);
+                    }
+                }
+            };
+
+
+            // ==========================================
+            // 5. GESTIONNAIRE PRINCIPAL
+            // ==========================================
+            
+            // --- BOUTON 1 : BATIMENTS ---
+            document.querySelector('#plus-button-1').addEventListener('click', () => {
+                const group = document.querySelector('#spheres-group');
+                const anims = document.querySelectorAll('.animatable-1');
+
+                if (STATE.activeSection === 1) {
+                    // Fermeture
+                    STATE.activeSection = null;
+                    group.setAttribute('visible', 'false');
                 } else {
-                    group3.setAttribute('visible', 'false');
-                    btn3.setAttribute('material', 'color', '#0056b3');
-                    btnText3.setAttribute('value', '+');
-                    btn3.setAttribute('position', '0.2 0 0');
-                    
-                    btn1.setAttribute('visible', 'true');
-                    btn2.setAttribute('visible', 'true');
-
-                    clearCrowd();
+                    // Ouverture
+                    if(STATE.activeSection) closeAllSections(); // Fermer les autres si ouvert
+                    STATE.activeSection = 1;
+                    group.setAttribute('visible', 'true');
+                    anims.forEach(el => el.emit('show'));
                 }
+                updateUI(STATE.activeSection);
             });
+
+            // --- BOUTON 2 : CARROUSEL ---
+            document.querySelector('#plus-button-2').addEventListener('click', () => {
+                if (STATE.activeSection === 2) {
+                    STATE.activeSection = null;
+                    CarouselManager.close();
+                } else {
+                    if(STATE.activeSection) closeAllSections();
+                    STATE.activeSection = 2;
+                    CarouselManager.open();
+                }
+                updateUI(STATE.activeSection);
+            });
+
+            // --- BOUTON 3 : ENTONNOIR ---
+            document.querySelector('#plus-button-3').addEventListener('click', () => {
+                if (STATE.activeSection === 3) {
+                    STATE.activeSection = null;
+                    FunnelManager.close();
+                } else {
+                    if(STATE.activeSection) closeAllSections();
+                    STATE.activeSection = 3;
+                    FunnelManager.open();
+                }
+                updateUI(STATE.activeSection);
+            });
+
+            // Helper pour fermer proprement n'importe quelle section ouverte
+            function closeAllSections() {
+                const prev = STATE.activeSection;
+                if(prev === 1) document.querySelector('#spheres-group').setAttribute('visible', 'false');
+                if(prev === 2) CarouselManager.close();
+                if(prev === 3) FunnelManager.close();
+            }
 
         });
     </script>
